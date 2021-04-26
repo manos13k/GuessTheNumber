@@ -9,6 +9,8 @@ win.geometry("360x300")
 win.configure(background = "#261E36")
 number = random.randint(0, 100)
 b=0
+tryclr = "#00FF22"
+tries = 0
 
 def Exit():
     win.destroy()
@@ -49,15 +51,30 @@ def Random():
     rannum.config(text="")
 
 def Game(*args):
-    global number,txtnum,Piclbl,x,donwarrow,uparrow,correct,txt
+    global number,txtnum,Piclbl,x,donwarrow,uparrow,correct,txt,tries,trieslbl,tryclr
     txtnum = txt.get()
     if txtnum == str(""):x=0
     else:
         if int(txtnum) > int(number):
+            tries = tries + 1
+            if tries == 2:tryclr = "#EFFF00"
+            elif tries == 4:tryclr = "#FFB300"
+            elif tries == 6:tryclr = "#FF0000"
+            trieslbl.config(text ="Tries:"+ str(tries),fg = tryclr)
             Piclbl.config(image=downarrow)
         elif int(txtnum) < int(number):
+            tries = tries + 1
+            if tries == 2:tryclr = "#EFFF00"
+            elif tries == 4:tryclr = "#FFB300"
+            elif tries == 6:tryclr = "#FF0000"
+            trieslbl.config(text ="Tries:"+ str(tries),fg = tryclr)
             Piclbl.config(image=uparrow)
         elif int(txtnum) == int(number):
+            tries = tries + 1
+            if tries == 2:tryclr = "#EFFF00"
+            elif tries == 4:tryclr = "#FFB300"
+            elif tries == 6:tryclr = "#FF0000"
+            trieslbl.config(text ="Tries:"+ str(tries),fg = tryclr)
             Piclbl.config(image=correct)
             txt.config(state = 'disabled')
     txt.delete(0, END)
@@ -83,6 +100,8 @@ exitbtn = Button(win, text="Exit", command=Exit, width=10, heigh=2,font=('Helvet
 exitbtn.grid(column=1, row=3)
 restartbtn = Button(win, text="Randomize", command=Random, width=10, heigh=2,font=('Helvetica', 11, 'bold'),bg="#95D2FF")
 restartbtn.grid(column=1, row=4)
+trieslbl = Label(win, width=9, font=('Helvetica', 10,"bold"),bg ='#261E36',fg = tryclr,justify = CENTER,text = "Tries:"+ str(tries), borderwidth=2, relief="groove")
+trieslbl.grid(column=0, row=4,columnspan = 3)
 
 win.bind("<Return>",Game)
 
