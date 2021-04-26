@@ -16,14 +16,16 @@ def Exit():
     win.destroy()
 
 def Random():
-    global number,rannum,randig,a,b
-    txt.delete(0, END)
+    global number,rannum,randig,a,b,tries
     randig=""
     rannum = Label(win,fg="#16C1D4",text = randig,bg="#261E36", font=('Helvetica', 20,"bold"))
-    rannum.grid(column = 0,row = 4,columnspan = 2)
+    rannum.grid(column = 0,row = 5,columnspan = 2)
     number = random.randint(0, 100)
     a=0
+    tries = 0
+    trieslbl.config(text ="Tries:"+ str(tries))
     txt.config(state='normal')
+    txt.delete(0, END)
     Piclbl.config(image=die)
     while (a<10):
         b = random.randint(1,5)
@@ -80,7 +82,7 @@ def Game(*args):
     txt.delete(0, END)
 
 uparrow = PhotoImage(file="uparrow.png")
-downarrow = PhotoImage(file="Down-Arrow-PNG-Image.png")
+downarrow = PhotoImage(file="downarrow.png")
 correct = PhotoImage(file="correct.png")
 die = PhotoImage(file="die.png")
 
@@ -100,7 +102,7 @@ exitbtn = Button(win, text="Exit", command=Exit, width=10, heigh=2,font=('Helvet
 exitbtn.grid(column=1, row=3)
 restartbtn = Button(win, text="Randomize", command=Random, width=10, heigh=2,font=('Helvetica', 11, 'bold'),bg="#95D2FF")
 restartbtn.grid(column=1, row=4)
-trieslbl = Label(win, width=9, font=('Helvetica', 10,"bold"),bg ='#261E36',fg = tryclr,justify = CENTER,text = "Tries:"+ str(tries), borderwidth=2, relief="groove")
+trieslbl = Label(win, width=9, font=('Helvetica', 8,"bold"),bg ='#261E36',fg = tryclr,justify = CENTER,text = "Tries:"+ str(tries), borderwidth=3, relief="groove",height = 2)
 trieslbl.grid(column=0, row=4,columnspan = 3)
 
 win.bind("<Return>",Game)
